@@ -1,0 +1,41 @@
+
+:root{
+    --linear-gradient : linear-gradient(#8bcdc1,#48bda8);
+    --btnColor: #0b6453;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.ro_form{
+    background-image: var(--linear-gradient);
+}
+.form-control,.form-select  {
+    background-color: #cae5df;
+}
+.form-control:focus{
+    box-shadow: none !important;
+   
+}
+.form-select.is-valid:not([multiple]):not([size]), .form-select.is-valid:not([multiple])[size="1"], .was-validated .form-select:valid:not([multiple]):not([size]), .was-validated .form-select:valid:not([multiple])[size="1"] ,
+.form-control.is-valid, .was-validated .form-control:valid{
+    background-image: none;
+}
+
+.btn{
+ background-color: var(--btnColor) !important;
+ border: var(--btnColor);
+  border-radius: 22px ;
+  padding: 0.725rem 1.25rem;
+  
+}
+.btn-primary{
+border-top:3px solid #8bcdc1 !important;
+border-right:3px solid #8bcdc1 !important;
+  box-shadow: 2px 2px 4px #0a5346;
+}
+.btn:focus{
+    box-shadow: none;
+   
+}
