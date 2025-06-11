@@ -3,6 +3,8 @@ import jsPDF from "jspdf";
 import { autoTable } from "jspdf-autotable";
 import Swal from "sweetalert2";
 import PuffLoader from "react-spinners/PuffLoader";
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 
 const RoForm = () => {
   const formRef = useRef(null);
@@ -95,7 +97,9 @@ const RoForm = () => {
     doc.text("email", 14, 80);
 
     doc.text(`INVOICE NO.:  #${idCounter}`, 140, 40);
-    doc.text("DATE: " + new Date().toLocaleDateString(), 140, 50);
+const date = new Date();
+const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+doc.text("DATE: " + formattedDate, 140, 50);
     // doc.text("CUSTOMER ID: ABC12345", 140, 60);
     const custX = 14;
     let custY = 100;
@@ -162,7 +166,7 @@ doc.line(marginLeft, 280, pageWidth - marginLeft, 280);
    doc.text("for more info visit,", 14, 290);
    doc.text("www.quickservices.co.in", 60, 290);
     // Saving the PDF
-    doc.save("invoice.pdf");
+    doc.save(`invoice ${idCounter}.pdf`);
   }
 
 
@@ -181,7 +185,7 @@ doc.line(marginLeft, 280, pageWidth - marginLeft, 280);
       text: "Do you want to submit the form?",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#4FBFAB",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, Submit!",
     }).then((result) => {
@@ -247,9 +251,12 @@ doc.line(marginLeft, 280, pageWidth - marginLeft, 280);
   return (
     <>
       <section className="ro_form">
+       <div style={{backgroundColor:' #0b6453'}}>
+   <h1 className="text-center py-3 text-white">Quick Services</h1>
+          <h5 className="pb-3 text-center text-white">Customer Service Form</h5>
+        </div>
         <div className="container" role="main">
-          <h1 className="text-center py-3">Quick Services</h1>
-          <h5 className="mb-5 text-center">Customer Service Form</h5>
+       
           <form
             ref={formRef}
             aria-label="Quick services form"
@@ -259,7 +266,7 @@ doc.line(marginLeft, 280, pageWidth - marginLeft, 280);
             action="https://script.google.com/macros/s/AKfycbzR-lOOEg7_-ZbOdTXxoiOwYVBrFU86x_64q7ztl2L93Gsi0CGpSJi-E4BBnkPYR6gJ/exec"
             method="post"
           >
-            <div className="row">
+            <div className="row mt-3">
               {/* First Name */}
               <div className="col-12 col-md-6 mb-3">
                 <label htmlFor="fname" className="form-label">
@@ -280,21 +287,22 @@ doc.line(marginLeft, 280, pageWidth - marginLeft, 280);
               </div>
 
               {/* Last Name */}
-              <div className="col-12 col-md-6 mb-3">
+              <div className="col-12  col-md-6 mb-3">
                 <label htmlFor="lname" className="form-label">
                   Last Name
                 </label>
-                <input
+                 <input
                   type="text"
                   className="form-control"
                   id="lname"
-                  placeholder="Enter Last Name"
-                  name="lname"
+                 placeholder="Enter Last Name"
+                   name="lname"
                   value={custDetails.lname}
                   onChange={handleChange}
                   required
                   aria-required="true"
                 />
+                  
                 <div className="invalid-feedback">Please write last name.</div>
               </div>
 
@@ -341,7 +349,7 @@ doc.line(marginLeft, 280, pageWidth - marginLeft, 280);
               </div>
 
               {/* Date of Completion */}
-              <div className="mb-3 col-12 col-md-4">
+              {/* <div className="mb-3 col-12 col-md-4">
                 <label htmlFor="DoComp" className="form-label">
                   Date of Completion
                 </label>
@@ -358,10 +366,10 @@ doc.line(marginLeft, 280, pageWidth - marginLeft, 280);
                 <div className="invalid-feedback">
                   Please write Date of Completion
                 </div>
-              </div>
+              </div> */}
 
               {/* Payment Mode */}
-              <div className="col-12 col-md-4 mb-3">
+              <div className="col-12 col-md-6 mb-3">
                 <label htmlFor="payment" className="form-label">
                   Mode of Payment
                 </label>
@@ -378,13 +386,14 @@ doc.line(marginLeft, 280, pageWidth - marginLeft, 280);
                   <option value="Cash">Cash on Delivery</option>
                   <option value="UPI">UPI</option>
                 </select>
+         
                 <div className="invalid-feedback">
                   Please write Payment Mode.
                 </div>
               </div>
 
               {/* Service Person Name */}
-              <div className="col-12 col-md-4 mb-3">
+              <div className="col-12 col-md-6 mb-3">
                 <label htmlFor="serpname" className="form-label">
                   Service Person Name
                 </label>
@@ -428,7 +437,7 @@ doc.line(marginLeft, 280, pageWidth - marginLeft, 280);
               {/* Select Data */}
               <div className="col-12 col-md-4 mb-3">
                 <label htmlFor="data" className="form-label">
-                  Select Data
+                 Description
                 </label>
                 <input
                   type="text"
@@ -503,7 +512,7 @@ doc.line(marginLeft, 280, pageWidth - marginLeft, 280);
                       className="form-label"
                       id={`additional-label-${index}`}
                     >
-                      Select Data
+                     Description
                     </label>
                     <input
                       type="text"
@@ -567,15 +576,12 @@ doc.line(marginLeft, 280, pageWidth - marginLeft, 280);
               {/* Additional Fields */}
 
               <div className="col-12 col-md-6 d-flex align-items-center mb-3">
-                <p className="mb-0">Do you want to add more data?</p>
-                <button
-                  type="button"
-                  onClick={handleAddDataClick}
-                  className="btn btn-success ms-5"
-                  aria-label="Add more data"
-                >
-                  Yes
-                </button>
+                <p className="mb-0 me-5">Do you want to add more data?</p>
+            
+                 <Fab color="success" aria-label="add"   onClick={handleAddDataClick} style={{width:"45px", height:'45px'}}>
+        <AddIcon />
+      </Fab>
+               
               </div>
 
               <div className="d-flex justify-content-center mb-3">
@@ -603,8 +609,9 @@ doc.line(marginLeft, 280, pageWidth - marginLeft, 280);
                 <table className="table" role="table">
                   <thead>
                     <tr>
-                      <th scope="col">Data</th>
+                      <th scope="col">Description</th>
                       <th scope="col">Quantity</th>
+                      <th scope="col">Discount</th>
                       <th scope="col">Price</th>
                       <th scope="col">Total Price</th>
                     </tr>
@@ -614,6 +621,7 @@ doc.line(marginLeft, 280, pageWidth - marginLeft, 280);
                       <tr key={index}>
                         <td>{item.data}</td>
                         <td>{item.quantity}</td>
+                        <td>{item.discount !==undefined ? item.discount :0}</td>
                         <td>{(parseFloat(item.price) || 0).toFixed(2)}</td>
                         <td>{(parseFloat(item.total) || 0).toFixed(2)}</td>
                       </tr>
