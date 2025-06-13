@@ -136,7 +136,7 @@ custY += lineHeight; // Move down by lineHeight
 doc.line(marginLeft, custY + 2, pageWidth - marginLeft, custY + 2); // Adjust line position based on custY
 
 // Prepare invoice data
-const defaultRows = 7; // Set the default number of rows
+const defaultRows = 8; // Set the default number of rows
 const invoiceData = [];
 
 // Populate invoiceData with user-added descriptions
@@ -179,7 +179,8 @@ autoTable(doc, {
   startY: custY + 10,
   theme: "grid",
   columnStyles: {
-    1: { halign: 'right' },
+    0:{halign:'center'},
+    1: { halign: 'left' },
     2: { halign: 'right' }, // QUANTITY column (index 2)
     3: { halign: 'right' }, // DISCOUNT column (index 3)
     4: { halign: 'right' }, // AMOUNT column (index 4)
@@ -190,12 +191,7 @@ autoTable(doc, {
     lineColor: [0, 0, 0], // Set the line color for borders (black)
     cellPadding: 2, // Optional: Add padding to cells
     fillColor: [255, 255, 255], // Default fill color for cells
-    border: {
-      // top: { style: 'solid', width: 0.5, color: [0, 0, 0] }, // Top border
-      // bottom: { style: 'solid', width: 0.5, color: [0, 0, 0] }, // Bottom border
-      left: null, // No left border
-      right: null, // No right border
-    },
+  
   },
   didParseCell: function (data) {
     // Draw line below header
@@ -233,7 +229,8 @@ autoTable(doc, {
       { content: "", styles: {} },
       { content: "", styles: {} },
       { content: "", styles: {} },
-      { content: "TOTAL DUE :", styles: { halign: 'right', fontStyle: 'bold', fillColor: [255, 255, 255], textColor: [0, 0, 0] } },
+      { content: "TOTAL DUE :", styles: { halign: 'right', fontStyle: 'bold', fillColor: [255, 255, 255], textColor: [0, 0, 0], 
+   } },
       {
         content: `Rs.${totalPrice.toFixed(2)}`,
         styles: { halign: "right", fontStyle: 'bold', fillColor: [255, 255, 255], textColor: [0, 0, 0] },
