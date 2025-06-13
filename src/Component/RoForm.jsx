@@ -191,8 +191,8 @@ autoTable(doc, {
     cellPadding: 2, // Optional: Add padding to cells
     fillColor: [255, 255, 255], // Default fill color for cells
     border: {
-      top: { style: 'solid', width: 0.5, color: [0, 0, 0] }, // Top border
-      bottom: { style: 'solid', width: 0.5, color: [0, 0, 0] }, // Bottom border
+      // top: { style: 'solid', width: 0.5, color: [0, 0, 0] }, // Top border
+      // bottom: { style: 'solid', width: 0.5, color: [0, 0, 0] }, // Bottom border
       left: null, // No left border
       right: null, // No right border
     },
@@ -200,8 +200,8 @@ autoTable(doc, {
   didParseCell: function (data) {
     // Draw line below header
     if (data.row.index === 0) {
-      const headerY = data.cell.y + data.cell.height; // Position right below the header
-      doc.line(marginLeft, headerY, pageWidth - marginLeft, headerY); // Line below header
+      // const headerY = data.cell.y + data.cell.height; // Position right below the header
+      // doc.line(marginLeft, headerY, pageWidth - marginLeft, headerY); // Line below header
       data.cell.styles.fillColor = [255, 255, 255]; // White color for header
       data.cell.styles.textColor = [0, 0, 0]; // Black text color for header
     }
