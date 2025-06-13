@@ -1,7 +1,7 @@
 
 import './App.css'
 import RoForm from './Component/RoForm'
-import Data from './Component/Data';
+// import Data from './Component/Data';
 
 function App() {
 
